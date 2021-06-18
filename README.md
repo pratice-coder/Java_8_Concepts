@@ -82,3 +82,56 @@ Functional Interface in glance -
        |-------|  |--------------------------------|
          Type       Lambda Expression
 4. It can be used to invoke Lambda expression.
+
+Why Functional Interface should contains only one abstarct method ?
+--------------------------------------------------------------------
+Ans - 
+    interface Interf {
+       public void m1();
+    }
+    
+    Interf i = a -> System.out.println(a*a);
+    i.m1(10);
+    i.m2(20);
+    
+    In the above case, Compiler will map the whole lambda expression to the m1() abstarct method.
+    
+    interface Interf {
+       public void m1();
+       public void m2();
+    }
+    
+    Interf i = a -> System.out.println(a*a);
+    i.m1(10);
+    i.m2(20);
+    
+    In the above case, compiler will be confused as the lambda expression is going to be mapped whether m1() or m2().
+    So, programmer gets a compile time error now.
+    CE: Incompatible types: Interf is not a functional interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
