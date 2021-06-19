@@ -107,8 +107,29 @@ Ans -
     
     In the above case, compiler will be confused as the lambda expression is going to be mapped whether m1() or m2().
     So, programmer gets a compile time error now.
-    CE: Incompatible types: Interf is not a functional interface
+    CE: Incompatible types: Interf is not a functional interface.
+        Multiple None overriding abstract methods in interface Interf.
+        
+What is the advantage of @FunctionalInterface annotation ?
+-----------------------------------------------------------------------
 
+
+
+
+
+Lambda Expressions with Collections -
+_____________________________________________
+1. Comparator interface has only one abstract method i.e compare().
+2. Comparator is used to define our own sorting technique (means customized sorting).
+
+Syntax -
+   public int compare(Object obj1, Object obj2)
+      |- return -ve value if Obj1 has to come before Obj2
+      |- return +ve value if Obj1 has to come after Obj2
+      |- return 0 if Obj1 and Obj2 are equal
+      
+3. Default natural sorting order for numbers is "Ascending".
+   Default natural sorting order for Strings is based on the alphabatical order.
 
 
 
