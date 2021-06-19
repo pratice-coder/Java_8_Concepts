@@ -130,6 +130,12 @@ Syntax -
       
 3. Default natural sorting order for numbers is "Ascending".
    Default natural sorting order for Strings is based on the alphabatical order.
+   
+   
+   
+   
+   
+**Difference between Anonymous Inner Class and Lambda Expression -**__
 
 
 
