@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 /**
  * @author abinash
+ * Following program is to check whether the input number is greater/lesser than 100 using
+ * Predicate Interface
  */
 
 public class PredicateInterfaceDemo {
