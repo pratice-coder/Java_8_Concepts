@@ -16,8 +16,8 @@ public class PredicateInterfaceDemo1 {
 		System.out.println("Enter the input string : ");
 		String input = scanner.nextLine();
 		
-		Predicate<Integer> predicate = length -> length > 5;
-		if (predicate.test(input.length()))
+		Predicate<String> predicate = s -> s.length() > 5;
+		if (predicate.test(input))
 			System.out.println(input + " string length is greater than 5");
 		else
 			System.out.println(input + " string length is not greater than 5");
