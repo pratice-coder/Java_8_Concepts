@@ -596,13 +596,188 @@ Ans - YES. Upto Java 1.7 this facility was not available.
       }
 
 
+There are several predefined Functional Interfaces available from Java 1.8 onwards.
+1. Predicate
+2. Function
+3. Consumer
+4. Supplier
+        etc etc
+All these above Functional Interfaces are part of java.util.function package.
 
-**Predicate -**
+**Predicate (I) -**
+- It is a boolean valued function in Mathematics. In Java also, it holds the same purpose (conditional checking).
+- Available in java.util.function package.
+- It contains only one abstract method. 
+      boolean test(T t);
 
+Lets take a example to understand the Predicate.
+Check whether a given number is greater than 10 or not
 
+_Without Predicate and Lambda expression_ -
+public boolean test(Integer i) {
+   if(i > 10)
+     return true;
+   else
+     return false;
+}
 
+Now, replacing the same with Lambda expression as below.
+   i -> i > 10;
 
+As Predicate a Functional Interface it can refer to this Lambda expression as shown below.
+   Predicate<Integer> p = i -> i > 10;
+   p.test(100); // will return true
+       
+Q : Check if the length of a given string is greater than 5 or not ?
+Ans : class Test {
+          public static void main(String[] args) {
+            String s = "abddef";
+            Predicate<String> p = s -> s.length() > 5;
+            System.out.println(p.test(s));
+        }
+      }
+       
+Q : Check if the collection object is empty or not ?
+       
 
+_Predicate Joining_ -
+- Sometimes there might be scenarios where multiple predicates may need to joined.
+- Consider the following scenario.
+       We have 2 predicates. P1 and P2
+       P1 = Checks whether a number is greater then 10 or not
+       P2 = Checks wthether a number is an even number or not
+- These are the following methods available as part of Predicate Joining.
+       1. P1.negate() = This means that, Returns TRUE if a number is NOT greater than 10.
+       2. P1.and(P2) = This means that, Returns only TRUE if the number is greater than 10 and even number also.
+       3. P1.or(P2) = This means that, Returns TRUE if the number is greater than 10 OR even number.
+       
+Q : Write a program to display names starts with 'K' by using Predicate ?
+       import java.util.function.Predicate;
+       import java.util.stream.Stream;
+
+       public class PredicateDemo {
+              public static void main(String...args) {
+                     String[] arr = {"Sunny", "Kajal", "Malika", "Katrina", "Kareena"};
+                     Predicate<String> p = s -> s.startsWith("K");
+                     Stream.of(arr).filter(p).forEach(System.out::println);
+                     // Or you can do like this if you don't want to use Stream
+                     for(String s : arr) {
+                         if(p.test(s))
+                           System.out.println(s);
+                     }
+              }
+       }
+       
+
+Q : Predicate Example to remove null values and empty String from the given list ?
+       String[] arr = {"Durga", "", null, "Ravi", "", "Shiva", null};
+       
+       
+Q : Program for User Authentication by using Predicate ?
+       
+       
+_Predicate Interface isEqual() method_ -
+- Predicate interface has one static method defined in it.
+       public static Predicate<T> isEqual(T t)
+- This is used to check, whether the predicate is equal to or not.
+       Example
+         Predicate<String> p = Predicate.isEqual("Hello");
+         System.out.println(p.test("Hello")); // returns true
+         System.out.println(p.test("Hi"); // returns false
+       
+- Just remember, in case of working with custom Collection.. do override equals() method otherwise it will invoke Object class equals() method.
+       
+       
+**Function (I) -**
+- 
+       
+       
+       
+**Consumer (I) -**
+- It is a functional interface.
+- This interface consumes value and perform certain operation on it.
+- As it is a functional interface, it has only one abstract method.
+       void accept(T t)
+- It does not return any type.
+       
+  Example -
+       Consumer<String> c = s -> System.out.println(s);
+       c.accept("Hello");
+       c.accept("World");
+   From the above example, we can see that.. the consumer is going to accept the string value and just print it. (This is the Consumer operation in this particular case).
+       
+ Q : Program to display Movie information by using Consumer ?
+       
+       
+       
+ Q : Program to display Student information by using Predicate, Function and Consumer ?
+       Complete 3 requirements as mention below.
+         1. Check if the Student marks is greater than or equal to 60 ?
+         2. Find the grades of the student based on the marks (greater than or equal to 60)
+         3. Show Student information
+       
+       
+ _Consumer Chaining -_
+ - When multiple consumers are going to be grouped together to form a complex consumer, then it is called Consumer chaining.
+ - This can be acheived by a default method that is available in Consumer.
+        public default andThen(C c);
+ Consider the following scenario.
+       c1.andThen(c2).andThen(c3).accept(m);
+ In the above example, m is the movie object.
+                       c1 notifies on any update of a newly released movie.
+                       c2 provides the result of that movie i.e hit or flop.
+                       c3 responsible to store the movie information in the database.
+ So, first c1 will be eveluated then c2 and then c3.
+       
+       
+       
+ **Supplier (I) -**
+ - When there is a requirement where user does not provide any input but gets a specific type of O/P then that can be achieved by Supplier.
+ - This is a functional interface.
+ - As it is a functional interface, it does have only one abstract method.
+ - Supplier interface does not contain any default or static methods.
+ - Supplier get() does not take any argument but it has return type.
+       public R get();
+          Where R is the return type.
+       
+   interface Supplier<R> {
+        public R get();
+   }
+   Where R is the return type.
+       
+       
+ Q : Program to get System Date by using Supplier ?
+       
+ 
+ Q : Program to get Random Name by using Supplier ?
+       
+       
+ Q : Program to get Random OTP by using Supplier ?
+       
+       
+ Q : Program to get Random password by using Supplier ?
+       
+       
+       
+       
+ Difference between Predicate, Function, Consumer and Supplier ?
+       
+ Property                           Predicate                             Function                                Consumer                                     Supplier
+Purpose          To take some input and perform some conditional    To take some input and perform      To consume some input and perform        To supply some value based on our 
+                 checks.                                            required operation and return the   required operation. It won't return      requirement
+                                                                    result.                             anything.
+       
+interface        interface Predicate<T>                             interface Function<T,R>             interface Consumer<T>                    interface Supplier<R>
+declaration      {....}                                             {....}                              {....}                                   {....}
+       
+Single Abstract  public boolean test(T t);                          public R apply(T t);                public void accept(T t);                 public R get();
+Method (SAM)       
+       
+Default Methods  and(), or() and negate()                           andThen() and compose()             andThen()                                NA       
+                   (Predicate Joining)
+       
+static methods   isEqual()                                          identity()                          NA                                       NA
+       
 
 
 
