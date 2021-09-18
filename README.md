@@ -780,9 +780,105 @@ static methods   isEqual()                                          identity()  
        
 
 
+**Two-Argument (Bi-Directional) Function Interfaces -**
+_BiPredicate -_
+- The functionality exactly same as Predicate except only one diffference.
+  Predicate takes only one argument as input and returns boolean as return type. But if there is a requirement to have 2 inputs
+  as input argument type then better to go for BiPredicate.
+       interface BiPredicate<T,U> {
+           public boolean test(T t, U u);
+       }
+- All other default methods (or(),negate() and and()) also takes 2 arguments as input type.
+  Example
+       Program to check the sum of 2 numbers is even or not
+       class Test {
+          public static void main(String...args) {
+             BiPredicate<Integer,Integer> p = (a+b) -> (a+b)%2 == 0;
+             System.out.println(p.test(10,20)); // returns true
+          }
+       }
+       
+_BiFunction -_
+- The functionality exactly same as Function except only one difference.
+  Function takes only one argument as input and returns any return type. But if there is a requirement to have 2 inputs as input
+  argument type then better to go for BiFunction.
+       interface BiFunction<T,U,R> {
+            public R apply(T t, U u);
+       }
+  Example -
+       Program to return product if two numbers.
+       class Test {
+          public static void main(String[] args) {
+             BiFunction<Integer,Integer,Integer> f = (a+b) -> a*b;
+             System.out.println(f.apply(a,b));
+          }
+       }
+       
+  Creation of Student object by taking name and rollNo as input with BiFunction -
+       class Student {
+          String name;
+          int rollNo;
+       
+          public Student (String name, int rollNo) {
+             super();
+             this.name = name;
+             this.rollNo = rollNo;
+          }
+       }
+       
+       public class StudentDemo {
+          public static void main(String[] args) {
+             List<Student> list = new ArrayList<Student>();
+             BiFunction<String,Integer,Student> f = (name, rollNo) -> new Student(name, rollNo);
+             list.add(f.apply("Durga",100));
+             list.add(f.apply("Ravi",200));
+             list.add(f.apply("Shiva",300));
+       
+             for(Student s : list) {
+                System.out.println(s.name);
+                System.out.println(s.rollNo);
+                System.out.print("\n");
+             }
+          }
+       }
 
-
-
+       
+  Calculate monthly salary with Employee and Timesheet by using BiFunction -
+       class Student {
+          int empId;
+          String name;
+          double wage;
+       }
+       
+       class TimeSheet {
+          int empId;
+          int workingDays;
+       }
+       
+       
+  _BiConsumer -_
+  - The functionality exactly same as Consumer except only one difference.
+    Consumer takes only one argument as input and returns any return type. But if there is a requirement to have 2 inputs as input
+    argument type then better to go for BiConsumer.
+       interface BiConsumer<T,U> {
+            public R accept(T t, U u);
+       }
+       
+    Example -
+       Demo program to find out the concatenation of 2 strings
+       class Test {
+          public static void main(String...args) {
+             BiConsumer<String,String> c = (s1,s2) -> System.out.println(s1+s2);
+             c.accept("durga","soft");
+          }
+       }
+       
+       
+   Demo Program to increment Employee Salary by using BiFunction and BiConsumer -
+       
+       
+       
+   Comparasion table between One-argument and Two-argument Functional Interfaces -
 
 
 
